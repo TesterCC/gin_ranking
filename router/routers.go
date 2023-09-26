@@ -18,9 +18,9 @@ func Router() *gin.Engine{
 	user := r.Group("/user")
 
 	{
-		// router use controllers
-		user.GET("/info", controllers.GetUserInfo)
-		user.GET("/list", controllers.GetList)
+		// router use controllers   // 小项目接口少可以不用结构体方法调用，大项目推荐用下面这种方式
+		user.GET("/info", controllers.UserController{}.GetUserInfo)
+		user.POST("/list", controllers.UserController{}.GetList)
 
 		user.POST("/add", func(ctx *gin.Context) {
 			//ctx.String(http.StatusOK, "user add")
@@ -36,5 +36,13 @@ func Router() *gin.Engine{
 
 		})
 	}
+
+	order := r.Group("/order")
+
+	{
+		order.GET("/info", controllers.OrderController{}.GetUserInfo)
+		order.POST("/list", controllers.OrderController{}.GetList)
+	}
+
 	return r
 }
