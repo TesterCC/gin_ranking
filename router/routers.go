@@ -1,6 +1,7 @@
 package router
 
 import (
+	"gin_ranking/controllers"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -17,6 +18,10 @@ func Router() *gin.Engine{
 	user := r.Group("/user")
 
 	{
+		// router use controllers
+		user.GET("/info", controllers.GetUserInfo)
+		user.GET("/list", controllers.GetList)
+
 		user.POST("/add", func(ctx *gin.Context) {
 			//ctx.String(http.StatusOK, "user add")
 			ctx.JSON(http.StatusOK, "user add")
