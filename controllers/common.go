@@ -26,5 +26,5 @@ func ReturnSuccess(c *gin.Context, code int, msg interface{}, data interface{}, 
 func ReturnError(c *gin.Context, code int, msg interface{}, data interface{}) {
 	//json := &JsonStruct{Code: code, Msg: msg, Data: data}
 	json := &JsonErrStruct{Code: code, Msg: msg, Data: data}
-	c.JSON(http.StatusInternalServerError, json)
+	c.JSON(http.StatusBadRequest, json)
 }
