@@ -18,7 +18,7 @@ func Router() *gin.Engine{
 	user := r.Group("/user")
 
 	{
-		// router use controllers   // 小项目接口少可以不用结构体方法调用，大项目推荐用下面这种方式
+		// router use controllers   // 小项目接口少可以不用结构体方法调用，大项目推荐用下面这种方式,以防方法名冲突
 		user.GET("/info", controllers.UserController{}.GetUserInfo)
 		user.POST("/list", controllers.UserController{}.GetList)
 
