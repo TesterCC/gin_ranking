@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"gin_ranking/router"
 )
 
@@ -8,8 +9,26 @@ import (
 
 func main() {
 
+	//// catch exception
+	//defer func() {
+	//	if err := recover(); err != nil {
+	//		fmt.Println("捕获异常:", err)
+	//	}
+	//}()
+
+	// defer recover panic // 先defer的后执行，后defer的先执行
+	defer fmt.Println(1)
+	defer fmt.Println(2)
+	defer fmt.Println(3)
+
+	//// cause crash
+	//panic("000")   // 3 2 1  捕获异常： 000
+
 	r := router.Router()
 	r.Run(":9999")
+
+
+
 
 	//r := gin.Default()
 	//

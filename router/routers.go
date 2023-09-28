@@ -19,7 +19,8 @@ func Router() *gin.Engine{
 
 	{
 		// router use controllers   // 小项目接口少可以不用结构体方法调用，大项目推荐用下面这种方式,以防方法名冲突
-		user.GET("/info", controllers.UserController{}.GetUserInfo)
+		// 参数传递1 直接拼接
+		user.GET("/info/:id/:name", controllers.UserController{}.GetUserInfo)
 		user.POST("/list", controllers.UserController{}.GetList)
 
 		user.POST("/add", func(ctx *gin.Context) {
@@ -42,6 +43,8 @@ func Router() *gin.Engine{
 	{
 		order.GET("/info", controllers.OrderController{}.GetUserInfo)
 		order.POST("/list", controllers.OrderController{}.GetList)
+		order.POST("/listAll", controllers.OrderController{}.GetListAll)
+		order.POST("/listAllSearch", controllers.OrderController{}.GetListAllSearch)
 	}
 
 	return r
