@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -20,20 +21,20 @@ func (u UserController) GetUserInfo(c *gin.Context) {
 }
 
 func (u UserController) GetList(c *gin.Context) {
+	//logger.Write("日志信息","user")
+	// catch exception
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("捕获异常:", err)
+		}
+	}()
 
-	//// catch exception
-	//defer func() {
-	//	if err := recover(); err != nil {
-	//		fmt.Println("捕获异常:", err)
-	//	}
-	//}()
-	//
-	//// test case exception
-	//num1 := 1
-	//num2 := 0
-	//num3 := num1/num2
-	//
-	//fmt.Println("[D] result: ", num3)
+	// test case exception
+	num1 := 1
+	num2 := 0
+	num3 := num1/num2
+
+	fmt.Println("[D] result: ", num3)
 
 	ReturnError(c, 40000, "no data", nil)
 }

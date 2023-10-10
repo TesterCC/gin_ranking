@@ -1,4 +1,4 @@
-3-6 https://www.imooc.com/video/24560
+3-7 引入ORM框架Gorm并实现数据库操作 https://www.imooc.com/video/24561
 
 3-6 如何自定义logger中间件并实现日志收集
 
@@ -11,3 +11,5 @@
 ```
 go get github.com/sirupsen/logrus
 ```
+
+3-7 引入ORM框架Gorm并实现数据库操作

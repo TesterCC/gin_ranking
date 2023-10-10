@@ -2,6 +2,7 @@ package router
 
 import (
 	"gin_ranking/controllers"
+	logger "gin_ranking/pkg"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -9,6 +10,9 @@ import (
 func Router() *gin.Engine{
 	r := gin.Default()
 
+	// 以中间件的形式在路由中调用logger
+	r.Use(gin.LoggerWithConfig(logger.LoggerToFile()))
+	r.Use(logger.Recover)
 
 	// define router directly example
 	r.GET("/hello", func(ctx *gin.Context) {
