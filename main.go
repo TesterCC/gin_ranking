@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"gin_ranking/router"
 )
 
@@ -16,10 +15,10 @@ func main() {
 	//	}
 	//}()
 
-	// defer recover panic // 先defer的后执行，后defer的先执行
-	defer fmt.Println(1)
-	defer fmt.Println(2)
-	defer fmt.Println(3)
+	//// defer recover panic // 先defer的后执行，后defer的先执行
+	//defer fmt.Println(1)
+	//defer fmt.Println(2)
+	//defer fmt.Println(3)
 
 	//// cause crash
 	//panic("000")   // 3 2 1  捕获异常： 000
