@@ -28,7 +28,11 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 ```
 
+前三章基础demo在basic_learn分支中。
+
 4-2 实现用户登录和注册功能以及session的使用
+
+先清理架构旧代码，然后基于此框架做后续开发。
 
 ```
 项目功能：
