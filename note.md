@@ -28,8 +28,18 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 ```
 
-4-1 dev a real demo
-https://www.imooc.com/video/24563
+4-2 实现用户登录和注册功能以及session的使用
+
+```
+项目功能：
+1.用户注册
+2.用户登录
+3.活动规则
+4.参赛选手列表
+5.参赛选手详情
+6.排行榜
+7.投票
+```
 
 ## 基本开发流程
 
