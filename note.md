@@ -27,3 +27,12 @@ Gorm是Go的一个ORM（对象关系映射）库。支持包括：MySQL、Postgr
 go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 ```
+
+4-1 dev a real demo
+https://www.imooc.com/video/24563
+
+## 基本开发流程
+
+1.定义model
+2.定义controller
+3.定义router
