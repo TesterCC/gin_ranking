@@ -45,6 +45,50 @@ go get -u gorm.io/driver/mysql
 7.投票
 ```
 
+启动session需要安装的三方包：
+```
+go get github.com/gin-contrib/sessions
+```
+
+另外注意，这里要sessions生效，需要先在服务器上安装配置redis
+
+## CentOS7安装Redis6
+
+```
+wget https://download.redis.io/releases/redis-6.2.12.tar.gz
+tar -zxvf redis-6.2.12.tar.gz
+cd redis-6.2.12
+make
+make install
+```
+若无报错，则会在src目录里生成编译好的可执行文件若干，单还不能直接通过redis命令启动，可以使用ln -s软链接到CentOS7的/bin目录下
+
+```shell
+sudo ln -s /opt/source/redis-6.2.12/bin/redis-server /bin/redis-server
+sudo ln -s /opt/source/redis-6.2.12/bin/redis-cli /bin/redis-cli
+sudo ln -s /opt/source/redis-6.2.12/bin/redis-benchmark /bin/redis-benchmark
+sudo ln -s /opt/source/redis-6.2.12/bin/redis-sentinel /bin/redis-sentinel
+```
+
+redis.conf中需要修改的内容
+```
+bind 0.0.0.0   # 方便调试，注意，对外开放后一定要设置密码
+requirepass foobared    # 设置密码
+daemonize no   # supervisor启动保持no（因为supervisor都是非daemon启动的），如果是手动启动可以设置为yes
+```
+
+redis-server通过supervisor启动的配置
+```
+[program:redis]
+command=/opt/source/redis-6.2.12/bin/redis-server /opt/source/redis-6.2.12/bin/redis.conf
+autostart=true
+autorestart=true
+startsecs=5
+startretries=2000
+```
+
+todo 4-3
+
 ## 基本开发流程
 
 1.定义model
