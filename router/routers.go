@@ -35,7 +35,11 @@ func Router() *gin.Engine{
 
 		// 路径传参 name
 		user.GET("/info/:name", controllers.UserController{}.GetUserInfo)
+	}
 
+	player := r.Group("/player")
+	{
+		player.POST("/list", controllers.PlayerController{}.GetPlayers)
 	}
 
 	return r

@@ -20,7 +20,7 @@ func init() {
 	// attention: 初始化中使用 = 运算符，以确保它们成为全局变量，并且可以被其他包正常访问
 	DBEngine, err = gorm.Open(mysql.Open(config.MysqlDB), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			// 解决插入表的时候会自动添加复数的问题，如：user变成users
+			// 解决插入表的时候会自动添加复数的问题，如：user变成users; 这样就不用在每个models文件中重写TableName了
 			SingularTable: true,
 		},
 	})
