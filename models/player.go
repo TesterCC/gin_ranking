@@ -20,9 +20,15 @@ type Player struct {
 //	return "player"
 //}
 
-func GetPlayers(aid int) ([]Player, error) {
+//func GetPlayers(aid int) ([]Player, error) {
+//	var players []Player
+//	err := dao.DBEngine.Where("aid = ?", aid).Find(&players).Error
+//	return players, err
+//}
+
+func GetPlayers(aid int, sort string) ([]Player, error) {
 	var players []Player
-	err := dao.DBEngine.Where("aid = ?", aid).Find(&players).Error
+	err := dao.DBEngine.Where("aid = ?", aid).Order(sort).Find(&players).Error
 	return players, err
 }
 
