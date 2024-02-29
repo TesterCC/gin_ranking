@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"gin_ranking/cache"
 	"gin_ranking/models"
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -24,6 +25,12 @@ func (p PlayerController) GetPlayers(c *gin.Context) {
 
 // GetRanking mysql orderby 排序实现排名展示
 func (p PlayerController) GetRanking(c *gin.Context) {
+	// https://www.imooc.com/video/24568  03:16
+	err := cache.Rdb.Set(cache.Rctx, "name", "zstest", 0).Err()
+	if err != nil {
+		panic(err)
+	}
+
 	aidStr := c.DefaultPostForm("aid", "0")
 	aid, _ := strconv.Atoi(aidStr)
 
@@ -32,6 +39,7 @@ func (p PlayerController) GetRanking(c *gin.Context) {
 		ReturnError(c, 4004, "No data")
 		return
 	}
+
 	ReturnSuccess(c, 0, "request success", rs, 1)
 	return
 }
