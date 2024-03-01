@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"gin_ranking/cache"
 	"gin_ranking/models"
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -44,8 +45,20 @@ func (p PlayerController) GetRanking(c *gin.Context) {
 	// method 2 simplify
 	redisKey := "ranking:" + aidStr
 
-	rs, err := models.GetPlayers(aid, "score desc") // 按score字段降序排序
-	if err != nil {
+	// 通过有序集合获取 https://pkg.go.dev/github.com/redis/go-redis/v9#Client.ZRevRange
+	rs, err := cache.Rdb.ZRevRange(cache.Rctx, redisKey, 0, -1).Result()
+
+	if err == nil && len(rs) > 0 {
+		return
+	}
+
+
+
+
+	rsDb, errDb := models.GetPlayers(aid, "score desc") // 按score字段降序排序
+	if errDb != nil {
+		// todo
+
 		ReturnError(c, 4004, "No data")
 		return
 	}
