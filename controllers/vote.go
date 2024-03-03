@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"gin_ranking/cache"
 	"gin_ranking/models"
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -28,8 +29,8 @@ func (v VoteController) AddVote(c *gin.Context) {
 		return
 	}
 
-	play, _ := models.GetPlayerIno(playerId)
-	if play.Id == 0 {
+	player, _ := models.GetPlayerInfo(playerId)
+	if player.Id == 0 {
 		ReturnError(c, 4002, "player isn't exist")
 		return
 	}
@@ -44,6 +45,12 @@ func (v VoteController) AddVote(c *gin.Context) {
 	if err == nil {
 		// update vote score info, score++
 		models.UpdatePlayerScore(playerId)
+
+		// after update mysql data, update redis data
+		redisKey := "ranking:" + strconv.Itoa(player.Aid)
+		cache.Rdb.ZIncrBy(cache.Rctx,redisKey,1, strconv.Itoa(playerId))
+
+
 		ReturnSuccess(c, 0, "vote success", rs, 1)
 		return
 	}

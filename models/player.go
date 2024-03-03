@@ -32,7 +32,7 @@ func GetPlayers(aid int, sort string) ([]Player, error) {
 	return players, err
 }
 
-func GetPlayerIno(id int) (Player, error) {
+func GetPlayerInfo(id int) (Player, error) {
 	var player Player
 	err := dao.DBEngine.Where("id = ?", id).First(&player).Error
 	return player, err
@@ -43,6 +43,5 @@ func UpdatePlayerScore(id int) {
 
 	// https://gorm.io/zh_CN/docs/update.html#%E4%BD%BF%E7%94%A8-SQL-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%9B%B4%E6%96%B0
 	// db.Model(&product).Where("quantity > 1").UpdateColumn("quantity", gorm.Expr("quantity - ?", 1))
-	dao.DBEngine.Model(&player).Where("id = ?",id).UpdateColumn("score", gorm.Expr("score + 1", 1))
-
+	dao.DBEngine.Model(&player).Where("id = ?", id).UpdateColumn("score", gorm.Expr("score + ?", 1))
 }
