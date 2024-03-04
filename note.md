@@ -2,6 +2,18 @@
 
 go + gin + mysql5.7/8.0
 
+## Build
+
+交叉编译命令
+
+```shell
+GOOS=linux GOARCH=amd64 go build
+```
+
+会编译出linux可执行文件 gin_ranking
+上传到服务器指定目录，执行：`chmod +x gin_ranking`
+启动程序: `./gin_ranking`
+
 ## Notes
 
 3-7 引入ORM框架Gorm并实现数据库操作 https://www.imooc.com/video/24561
@@ -109,7 +121,7 @@ go get "github.com/redis/go-redis/v9"
 ```
 
 Redis GUI工具
-
+支持windows环境
 ```
 RedisInsight
 https://redis.io/docs/connect/insight/
